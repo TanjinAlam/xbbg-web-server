@@ -15,9 +15,8 @@ app = FastAPI()
 async def read_bdp_data(request_body: RequestBody):
     try:
         body_data = request_body
-        print(body_data)
         response = await async_xbbg(body_data.tickers_name,body_data.fields_name)
-        return body_data
+        return response
     except Exception as e:
         print(e)
 
