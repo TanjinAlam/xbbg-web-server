@@ -9,9 +9,7 @@ from utility.helper import async_xbbg
 
 app = FastAPI()
 
-
-
-@app.post("/read-bdp data")
+@app.post("/read-bdp-data")
 async def read_bdp_data(request_body: RequestBody):
     try:
         body_data = request_body
