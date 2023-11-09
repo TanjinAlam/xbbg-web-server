@@ -22,6 +22,7 @@ async def read_bdp_data(request_body: RequestDataBDP):
 async def read_bdh_data(request_body: RequestDataBDH):
     try:
         body_data = request_body
+        print(body_data)
         response = await async_xbbg(body_data.tickers_name,body_data.fields_name,'bdh')
         return response
     except Exception as e:
