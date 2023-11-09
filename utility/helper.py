@@ -1,4 +1,5 @@
 import asyncio
+import pandas as pd
 from xbbg import blp
 
 #wil have a switch case to iterate other xbbg function
@@ -17,4 +18,10 @@ def get_bdp_data(tickers,flds):
 
 def get_bdh_data(tickers,flds,start_date,end_date):
     requested_data = blp.bdh(tickers=tickers, flds=flds, start_date=start_date, end_date=end_date)
-    return requested_data
+    
+    # Assuming requested_data is a Pandas DataFrame
+    json_data = requested_data.to_json(orient="records")
+    # Convert JSON data back to Pandas DataFrame
+    df = pd.read_json(json_data, orient="records")
+    
+    return df.to_json(orient='records')
