@@ -31,24 +31,15 @@ def get_bdh_data(tickers,flds,start_date,end_date, adjust):
     if adjust == "-" or None:
         requested_data = blp.bdh(tickers=tickers, flds=flds, start_date=start_date, end_date=end_date)
     else:
-         requested_data = blp.bdh(tickers=tickers, flds=flds, start_date=start_date, end_date=end_date,adjust=extra)
-    # Assuming requested_data is a Pandas DataFrame
-    json_data = requested_data.to_json(orient="records")
-    # Convert JSON data back to Pandas DataFrame
-    df = pd.read_json(json_data, orient="records")
-    
-    return df.to_dict(orient='records')
+         requested_data = blp.bdh(tickers=tickers, flds=flds, start_date=start_date, end_date=end_date,adjust=adjust)
+         
+    return requested_data.to_json()
 
 
 def get_bds_data(tickers,flds,start_date,end_date):
     requested_data = blp.bds(tickers=tickers, flds=flds, DVD_Start_Dt=start_date, DVD_End_Dt=end_date)
     
-    # Assuming requested_data is a Pandas DataFrame
-    json_data = requested_data.to_json(orient="records")
-    # Convert JSON data back to Pandas DataFrame
-    df = pd.read_json(json_data, orient="records")
-    
-    return df.to_dict(orient='records')
+    return requested_data.to_json()
 
 
 
@@ -62,12 +53,7 @@ def get_bdib_data(ticker_name,session,query,date):
     elif query: 
         requested_data = blp.bdib(ticker=ticker_name, dt=date, session=session)
     
-    # Assuming requested_data is a Pandas DataFrame
-    json_data = requested_data.to_json(orient="records")
-    # Convert JSON data back to Pandas DataFrame
-    df = pd.read_json(json_data, orient="records")
-    
-    return df.to_dict(orient='records')
+    return requested_data.to_json()
 
 
 
@@ -106,13 +92,8 @@ def get_earning_data(ticker_name,by,query,currency,level, date , period):
         requested_data = blp.bdib(ticker=ticker_name, by=by, typ=query, Eqy_Fund_Year=date)
     elif period:
         requested_data = blp.bdib(ticker=ticker_name, by=by, typ=query, Number_Of_Periods=period)
-        
-    # Assuming requested_data is a Pandas DataFrame
-    json_data = requested_data.to_json(orient="records")
-    # Convert JSON data back to Pandas DataFrame
-    df = pd.read_json(json_data, orient="records")
     
-    return df.to_dict(orient='records')
+    return requested_data.to_json()
 
 
 def get_dividend_data(tickers,flds,start_date,end_date, query):
@@ -120,9 +101,5 @@ def get_dividend_data(tickers,flds,start_date,end_date, query):
         requested_data = blp.dividend(tickers=tickers, start_date=start_date, end_date=end_date)
     else:
          requested_data = blp.dividend(tickers=tickers, start_date=start_date, end_date=end_date,typ=query)
-    # Assuming requested_data is a Pandas DataFrame
-    json_data = requested_data.to_json(orient="records")
-    # Convert JSON data back to Pandas DataFrame
-    df = pd.read_json(json_data, orient="records")
     
-    return df.to_dict(orient='records')
+    return requested_data.to_json()
